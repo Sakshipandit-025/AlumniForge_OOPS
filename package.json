@@ -1,0 +1,31 @@
+{
+  "name": "sc_alumniforge",
+  "version": "1.0.0",
+  "description": "Alumni Forge is a learning resource platform that helps students and developers discover curated resources for programming languages and technologies. The project provides a simple and consistent interface for accessing documentation, certification resources, video courses, and developer roadmaps.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanskriti-chaturvedi-190406/sc_AlumniForge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/sanskriti-chaturvedi-190406/sc_AlumniForge/issues"
+  },
+  "homepage": "https://github.com/sanskriti-chaturvedi-190406/sc_AlumniForge#readme",
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "@clerk/clerk-js": "^6.30.3",
+    "convex": "^1.45.0"
+  }
+}
