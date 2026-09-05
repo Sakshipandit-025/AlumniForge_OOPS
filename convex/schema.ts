@@ -17,5 +17,19 @@ export default defineSchema({
             v.literal("user")
         ),
         "createdAt": v.number()
-    }).index("by_clerk_id", ["clerkId"])
+    }).index("by_clerk_id", ["clerkId"]),
+
+    forumPosts: defineTable({
+        authorId: v.id("users"),
+        title: v.string(),
+        content: v.string(),
+        createdAt: v.number()
+    }).index("by_author_id", ["authorId"]),
+
+    forumComments: defineTable({
+        postId: v.id("forumPosts"),
+        authorId: v.id("users"),
+        content: v.string(),
+        createdAt: v.number()
+    }).index("by_post_id", ["postId"])
 });

@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as forum from "../forum.js";
 import type * as testAuth from "../testAuth.js";
 import type * as users from "../users.js";
 
@@ -18,6 +19,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  forum: typeof forum;
   testAuth: typeof testAuth;
   users: typeof users;
 }>;
