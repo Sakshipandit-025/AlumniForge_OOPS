@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express.js | Alumni Forge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #10261f;
+      --forest: #153d31;
+      --mint: #dff5e7;
+      --lime: #b9f36c;
+      --paper: #f7f8f3;
+      --line: rgba(16, 38, 31, 0.12);
+      --muted: #60736d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    header {
+      max-width: 1180px;
+      min-height: 270px;
+      margin: 18px auto 0;
+      padding: 68px 30px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+      border-radius: 28px;
+      background: linear-gradient(130deg, #0d3428 0%, #195342 54%, #0e2a22 100%);
+      box-shadow: 0 25px 50px rgba(16, 48, 39, 0.18);
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 370px;
+      height: 370px;
+      top: -205px;
+      right: -95px;
+      border: 60px solid rgba(185, 243, 108, 0.16);
+      border-radius: 50%;
+    }
+
+    header h2 {
+      position: relative;
+      z-index: 1;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(2.7rem, 6vw, 4.7rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    header h2::before {
+      content: "PROGRAMMING RESOURCES";
+      display: block;
+      margin-bottom: 18px;
+      color: var(--lime);
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    header p {
+      position: relative;
+      z-index: 1;
+      margin-top: 16px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 85px;
+    }
+
+    .section {
+      margin-bottom: 18px;
+      padding: 30px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(16, 38, 31, 0.045);
+    }
+
+    .section h3 {
+      margin-bottom: 18px;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.62rem;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .section > a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: #287b52;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .section > a::after {
+      content: "↗";
+      display: grid;
+      width: 26px;
+      height: 26px;
+      place-items: center;
+      color: var(--forest);
+      background: var(--mint);
+      border-radius: 50%;
+      transition: 0.2s ease;
+    }
+
+    .section > a:hover {
+      color: var(--forest);
+    }
+
+    .section > a:hover::after {
+      background: var(--lime);
+      transform: rotate(45deg);
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .video-card {
+      overflow: hidden;
+      background: #fbfdfb;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 28px rgba(16, 38, 31, 0.11);
+    }
+
+    iframe {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      border: none;
+      background: var(--forest);
+    }
+
+    .video-card p {
+      min-height: 72px;
+      padding: 15px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 900px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      header {
+        min-height: 245px;
+        margin: 12px 12px 0;
+        padding: 55px 20px;
+        border-radius: 22px;
+      }
+
+      .container {
+        width: calc(100% - 28px);
+        padding-top: 28px;
+      }
+
+      .section {
+        padding: 23px;
+      }
+
+      .section h3 {
+        font-size: 1.4rem;
+      }
+
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h2>Express.js</h2>
+    <p>Node.js Backend Framework</p>
+  </header>
+
+  <div class="container">
+    <!-- Documentation -->
+    <div class="section">
+      <h3>Documentation</h3>
+      <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Express_Nodejs/Introduction" target="_blank">
+        Express.js Documentation – MDN
+      </a>
+      <a href="https://expressjs.com/" target="_blank">
+        Express.js Official Documentation
+      </a>
+    </div>
+
+    <!-- Certification -->
+    <div class="section">
+      <h3>Certification</h3>
+      <a href="https://flexiple.com/express-js/certifications" target="_blank">
+        Express.js Certifications – Flexiple
+      </a>
+      <a href="https://www.coursera.org/courses?query=node%20express" target="_blank">
+        Node & Express Courses – Coursera
+      </a>
+    </div>
+
+    <!-- Resources -->
+    <div class="section">
+      <h3>Resources</h3>
+
+      <div class="video-grid">
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/videoseries?si=0FGwmc2rKbtGjFl-&amp;list=PL0Zuz27SZ-6P4vnjQ_PJ5iRYsqJkQhtUu"></iframe>
+          <p>Complete Express.js Playlist</p>
+        </div>
+
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/i3egAedcKf0"></iframe>
+          <p>Express JS Tutorial in One Video – Thapa Technical 🇮🇳</p>
+        </div>
+
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/L72fhGm1tfE"></iframe>
+          <p>Express JS Crash Course – Traversy Media</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="section">
+      <h3>Roadmap</h3>
+      <a href="https://roadmap.sh/backend" target="_blank">
+        Backend Developer Roadmap
+      </a>
+    </div>
+  </div>
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://sakshiaa.app.n8n.cloud/webhook/178831dd-7eff-4673-8bcf-82dc30036caa/chat'
+    });
+  </script>
+</body>
+</html>

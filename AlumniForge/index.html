@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlumniForge | Connect. Grow. Inspire.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #10261f;
+      --forest: #153d31;
+      --mint: #dff5e7;
+      --lime: #b9f36c;
+      --paper: #f7f8f3;
+      --line: rgba(16, 38, 31, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 82px;
+      margin: 18px auto 0;
+      padding: 0 10px 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 10px 40px rgba(21, 61, 49, 0.07);
+      backdrop-filter: blur(14px);
+    }
+
+    header h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+    }
+
+    header h1::before {
+      content: "✦";
+      color: #62a33a;
+      font-family: "DM Sans", sans-serif;
+      font-size: 1rem;
+      margin-right: 0.48rem;
+      vertical-align: 2px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.58rem 0.8rem;
+      color: #345149;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: 0.25s ease;
+    }
+
+    nav a:hover {
+      color: var(--forest);
+      background: var(--mint);
+    }
+
+    nav li:last-child a {
+      color: var(--forest);
+      border: 1px solid #afd8bc;
+      background: #effaf2;
+    }
+
+    .hero {
+      max-width: 1240px;
+      min-height: 570px;
+      margin: 0 auto;
+      padding: 118px 70px 100px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 60px 30px 24px;
+      z-index: -2;
+      border-radius: 38px;
+      background: linear-gradient(130deg, #0d3428 0%, #195342 54%, #0e2a22 100%);
+      box-shadow: 0 25px 50px rgba(16, 48, 39, 0.18);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 470px;
+      height: 470px;
+      right: -155px;
+      top: -130px;
+      z-index: -1;
+      border-radius: 50%;
+      border: 72px solid rgba(185, 243, 108, 0.16);
+      box-shadow: -370px 300px 0 -108px rgba(185, 243, 108, 0.12);
+    }
+
+    .hero h2 {
+      color: #fff;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+    }
+
+    .hero h2::before {
+      content: "ALUMNI NETWORK";
+      display: block;
+      margin-bottom: 23px;
+      color: var(--lime);
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 27px auto 34px;
+      color: #d6e9df;
+      font-size: 1.08rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+      padding: 14px 20px 14px 23px;
+      color: #142d24;
+      background: var(--lime);
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 9px 21px rgba(0, 0, 0, 0.14);
+      transition: 0.25s ease;
+    }
+
+    .btn::after {
+      content: "→";
+      display: grid;
+      width: 25px;
+      height: 25px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(20, 45, 36, 0.12);
+      font-size: 1.1rem;
+    }
+
+    .btn:hover {
+      background: #d0ff8b;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 28px rgba(0, 0, 0, 0.2);
+    }
+
+    .features {
+      width: min(1120px, calc(100% - 40px));
+      margin: 28px auto 96px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .feature-card {
+      min-height: 245px;
+      padding: 30px 24px 25px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(16, 38, 31, 0.045);
+      transition: 0.25s ease;
+    }
+
+    .feature-card:hover {
+      border-color: #a7d9b5;
+      transform: translateY(-7px);
+      box-shadow: 0 20px 35px rgba(16, 38, 31, 0.11);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 14px;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+    }
+
+    .feature-card p {
+      color: #60736d;
+      font-size: 0.94rem;
+    }
+
+    footer {
+      margin: 0 20px 20px;
+      padding: 28px 20px;
+      color: #bcd1c6;
+      background: #112e25;
+      border-radius: 18px;
+      text-align: center;
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--lime);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 850px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding: 105px 45px 90px;
+      }
+
+      nav a {
+        padding: 0.5rem 0.55rem;
+      }
+    }
+
+    @media (max-width: 610px) {
+      header {
+        width: calc(100% - 24px);
+        min-height: auto;
+        padding: 17px;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      header h1 {
+        font-size: 1.32rem;
+        white-space: nowrap;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      nav a {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.38rem;
+      }
+
+      .hero {
+        min-height: 500px;
+        padding: 90px 28px 75px;
+      }
+
+      .hero::before {
+        inset: 35px 0 20px;
+        border-radius: 25px;
+      }
+
+      .hero h2 {
+        font-size: clamp(2.7rem, 14vw, 4.2rem);
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+        margin-bottom: 55px;
+      }
+
+      .feature-card {
+        min-height: auto;
+      }
+
+      footer {
+        margin: 0 12px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>AlumniForge</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a >Network</a></li>
+        <li><a href="#">Events</a></li>
+        <li><a href="#">Mentorship</a></li>
+        <li><a href="network.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h2>Connect. Grow. Inspire.</h2>
+      <p>Welcome to AlumniForge- the only comprehensive digital platform you need to master any skill ! Join your alumni network, explore mentorship, and be part of a lifelong community.</p>
+      <a href="network.html" class="btn">Join the Network</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-card">
+      <h3>🌐 Global Networking</h3>
+      <p>Connect with alumni around the world. Build meaningful professional relationships and expand your opportunities.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>🎓 Mentorship Programs</h3>
+      <p>Find mentors or become one. Share knowledge and guide others through career and academic growth.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>📅 Exclusive Events</h3>
+      <p>Attend reunions, webinars, and workshops. Stay updated and engaged with your alumni community.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>💼 Career Opportunities</h3>
+      <p>Explore alumni-posted job openings, internships, and startup collaborations tailored for the community.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 AlumniForge. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+  </footer>
+
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://sakshiaa.app.n8n.cloud/webhook/178831dd-7eff-4673-8bcf-82dc30036caa/chat'
+    });
+  </script>
+</body>
+</html>

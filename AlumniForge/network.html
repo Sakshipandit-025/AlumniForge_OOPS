@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Your Network | AlumniForge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #10261f;
+      --forest: #153d31;
+      --mint: #dff5e7;
+      --lime: #b9f36c;
+      --paper: #f7f8f3;
+      --line: rgba(16, 38, 31, 0.14);
+      --muted: #60736d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+      overflow-x: hidden;
+      background: #eaf5ec;
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+    }
+
+    body::before {
+      width: 430px;
+      height: 430px;
+      top: -190px;
+      left: -120px;
+      background: #c7efa2;
+      opacity: 0.65;
+    }
+
+    body::after {
+      width: 500px;
+      height: 500px;
+      right: -240px;
+      bottom: -250px;
+      border: 75px solid #c4ead4;
+    }
+
+    .login-container {
+      width: min(100%, 470px);
+      padding: 42px 42px 32px;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow: 0 24px 60px rgba(21, 61, 49, 0.16);
+      backdrop-filter: blur(16px);
+    }
+
+    .login-container h2 {
+      margin-bottom: 31px;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2rem;
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+    }
+
+    .login-container h2::before {
+      content: "ALUMNIFORGE";
+      display: block;
+      margin-bottom: 11px;
+      color: #4d9231;
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .login-container label {
+      display: block;
+      margin: 17px 0 7px;
+      color: #345149;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .login-container input,
+    .login-container select {
+      width: 100%;
+      padding: 12px 13px;
+      color: var(--ink);
+      background: #fbfdfb;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .login-container input::placeholder {
+      color: #93a49e;
+    }
+
+    .login-container input:focus,
+    .login-container select:focus {
+      border-color: #70ae48;
+      box-shadow: 0 0 0 4px rgba(112, 174, 72, 0.15);
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 27px;
+      padding: 13px 18px;
+      color: #142d24;
+      background: var(--lime);
+      border: none;
+      border-radius: 11px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      box-shadow: 0 9px 19px rgba(75, 129, 44, 0.17);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #d0ff8b;
+      transform: translateY(-2px);
+      box-shadow: 0 13px 24px rgba(75, 129, 44, 0.24);
+    }
+
+    .footer-text {
+      margin-top: 21px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.84rem;
+    }
+
+    .footer-text a {
+      color: #287b52;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      .login-container {
+        padding: 34px 24px 28px;
+        border-radius: 20px;
+      }
+
+      .login-container h2 {
+        font-size: 1.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <h2>Enter your Credentials</h2>
+
+    <form action="dashboard.html">
+      <label for="userid">User ID</label>
+      <input type="text" id="userid" name="userid" placeholder="Enter your User ID" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+
+      <label for="email">College Email</label>
+      <input type="email" id="email" name="email" placeholder="Abc@abes.ac.in" required>
+
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <label for="branch">Branch</label>
+      <select id="branch" name="branch" required>
+        <option value="">Select Branch</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+        <option value="CIVIL">CIVIL</option>
+        <option value="MECH">MECH</option>
+      </select>
+
+      <button class="btn" type="submit">Login</button>
+    </form>
+
+    <p class="footer-text">Not a member? <a href="#">Join your network</a></p>
+  </div>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://sakshiaa.app.n8n.cloud/webhook/178831dd-7eff-4673-8bcf-82dc30036caa/chat'
+    });
+  </script>
+</body>
+</html>

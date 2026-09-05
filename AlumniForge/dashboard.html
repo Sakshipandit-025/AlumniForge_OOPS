@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alumini Forge</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #10261f;
+      --forest: #153d31;
+      --mint: #dff5e7;
+      --lime: #b9f36c;
+      --paper: #f7f8f3;
+      --line: rgba(16, 38, 31, 0.12);
+      --muted: #60736d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-width: 320px;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    header {
+      max-width: 1180px;
+      min-height: 320px;
+      margin: 18px auto 0;
+      padding: 76px 30px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #fff;
+      border-radius: 28px;
+      background: linear-gradient(130deg, #0d3428 0%, #195342 54%, #0e2a22 100%);
+      box-shadow: 0 25px 50px rgba(16, 48, 39, 0.18);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      top: -250px;
+      right: -120px;
+      border: 70px solid rgba(185, 243, 108, 0.16);
+      border-radius: 50%;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      bottom: -120px;
+      left: 8%;
+      border: 42px solid rgba(185, 243, 108, 0.12);
+      border-radius: 50%;
+    }
+
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(3rem, 7vw, 5.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+    }
+
+    header h1::before {
+      content: "LEARNING HUB";
+      display: block;
+      margin-bottom: 19px;
+      color: var(--lime);
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+    }
+
+    header p {
+      margin-top: 22px;
+      color: #d6e9df;
+      font-size: 1.05rem;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 44px 0 85px;
+    }
+
+    .section-title {
+      margin: 40px 0 16px;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 2rem;
+      letter-spacing: -0.045em;
+    }
+
+    .section-title:first-child {
+      margin-top: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      min-height: 168px;
+      padding: 25px 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(16, 38, 31, 0.045);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card::before {
+      content: "↗";
+      position: absolute;
+      top: 19px;
+      right: 20px;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      color: #3a6b50;
+      background: var(--mint);
+      border-radius: 50%;
+      font-size: 1.1rem;
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: #a7d9b5;
+      transform: translateY(-7px);
+      box-shadow: 0 20px 35px rgba(16, 38, 31, 0.11);
+    }
+
+    .card:hover::before {
+      color: var(--forest);
+      background: var(--lime);
+      transform: rotate(45deg);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: var(--forest);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.42rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    @media (max-width: 650px) {
+      header {
+        min-height: 285px;
+        margin: 12px 12px 0;
+        padding: 65px 22px;
+        border-radius: 22px;
+      }
+
+      header p {
+        font-size: 0.96rem;
+      }
+
+      .container {
+        width: calc(100% - 28px);
+        padding-top: 32px;
+      }
+
+      .section-title {
+        margin-top: 34px;
+        font-size: 1.72rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1>Alumni Forge</h1>
+      <p>All programming resources in one place</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- HOME -->
+    <div id="home">
+      <h2 class="section-title">Programming Languages</h2>
+      <div class="grid" id="languages"></div>
+
+      <h2 class="section-title">Frontend</h2>
+      <div class="grid" id="frontend"></div>
+
+      <h2 class="section-title">Backend</h2>
+      <div class="grid" id="backend"></div>
+
+      <h2 class="section-title">DSA</h2>
+      <div class="grid" id="dsa"></div>
+    </div>
+  </div>
+
+  <script>
+    const data = {
+      languages: ["C", "Rust", "Java", "Kotlin", "Python", "C++"],
+      frontend: ["HTML", "CSS", "JavaScript"],
+      backend: ["MongoDB", "Express", "React", "Node.js"],
+      dsa: ["DSA"]
+    };
+
+    const descriptions = {
+      "C": "Foundation of programming & systems",
+      "Rust": "Safe systems programming",
+      "Java": "Backend & enterprise development",
+      "Kotlin": "Modern JVM & Android development",
+      "Python": "General-purpose & scripting",
+      "HTML": "Structure of the web",
+      "CSS": "Styling modern websites",
+      "JavaScript": "Interactive web programming",
+      "C++": "High-performance programming",
+      "MongoDB": "NoSQL database",
+      "Express": "Backend framework",
+      "React": "Frontend library",
+      "Node.js": "JavaScript runtime",
+      "DSA": "Data Structures & Algorithms (Interviews + Practice)"
+    };
+
+    function load(section, id) {
+      const el = document.getElementById(id);
+
+      section.forEach(x => {
+        const card = document.createElement("a");
+        card.className = "card";
+
+        if (x === "DSA") {
+          card.href = "dsa.html";
+        } else {
+          card.href = `${x.toLowerCase().replace("++", "pp")}.html`;
+        }
+
+        card.innerHTML = `
+          <h3>${x}</h3>
+          <p>${descriptions[x] || "Learning resources"}</p>
+        `;
+
+        el.appendChild(card);
+      });
+    }
+
+    load(data.languages, "languages");
+    load(data.frontend, "frontend");
+    load(data.backend, "backend");
+    load(data.dsa, "dsa");
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://sakshiaa.app.n8n.cloud/webhook/178831dd-7eff-4673-8bcf-82dc30036caa/chat'
+    });
+  </script>
+</body>
+</html>
