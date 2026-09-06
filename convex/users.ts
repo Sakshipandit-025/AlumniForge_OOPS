@@ -63,3 +63,30 @@ export const createUser = mutation({
         return await ctx.db.get(userId);
     },
 });
+
+
+// for deletion
+export const deleteCurrentUser = mutation({
+  args: {},
+
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (identity === null) {
+      throw new Error("You must be signed in.");
+    }
+
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_clerk_id", (q) =>
+        q.eq("clerkId", identity.subject)
+      )
+      .unique();
+
+    if (user !== null) {
+      await ctx.db.delete(user._id);
+    }
+
+    return true;
+  },
+});
