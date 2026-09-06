@@ -4,12 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | AlumniForge</title>
+    <!-- Google Fonts for Serif Heading & Clean Body Text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base Reset & Colors */
+        :root {
+            --bg-color: #f4f6f4;
+            --card-bg: #ffffff;
+            --primary-green: #0a3a2a;
+            --accent-green: #14533d;
+            --text-muted: #83b39b;
+            --shadow-color: rgba(0, 0, 0, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        /* Outer Layout Wrapper */
+        .page-container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Top Green Header Banner */
+        .header-banner {
+            background: linear-gradient(135deg, #093325 0%, #0d4231 100%);
+            border-radius: 20px;
+            padding: 48px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        /* Abstract Circle Pattern Overlay */
+        .header-banner::after {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 35px solid rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+        }
+
+        .header-banner .subtitle {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .header-banner h1 {
+            color: #ffffff;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* White Card Container for Sign-In */
+        .card-container {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px 32px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 640px) {
+            .header-banner {
+                padding: 32px 16px;
+            }
+            .header-banner h1 {
+                font-size: 1.75rem;
+            }
+            .card-container {
+                padding: 24px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Welcome to AlumniForge</h1>
+    <main class="page-container">
+        <!-- Banner Section -->
+        <header class="header-banner">
+            <span class="subtitle">Alumni Network</span>
+            <h1>Welcome to AlumniForge</h1>
+        </header>
 
-    <div id="sign-in"></div>
+        <!-- Main Content / Sign-in Widget Area -->
+        <section class="card-container">
+            <div id="sign-in"></div>
+        </section>
+    </main>
 
     <script type="module" src="/src/login.js"></script>
 
