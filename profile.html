@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Profile | AlumniForge</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="profile.css">
+
+    <script>
+        (function () {
+            const THEME_KEY = "alumniForgeTheme";
+
+            const savedTheme =
+                localStorage.getItem(THEME_KEY) || "light";
+
+            const prefersDark =
+                window.matchMedia &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            const shouldUseDark =
+                savedTheme === "dark" ||
+                (savedTheme === "system" && prefersDark);
+
+            document.documentElement.classList.toggle(
+                "dark",
+                shouldUseDark
+            );
+        })();
+    </script>
+</head>
+
+<body>
+<nav class="navbar">
+
+    <a href="dashboard.html" class="navbar-brand">
+        AlumniForge
+    </a>
+
+    <ul class="navbar-menu">
+
+        <li>
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <span class="nav-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </span>
+                Community
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <span class="nav-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 9.6 9.6 0 0 1-4-.9L3 21l1.9-4.3A8.1 8.1 0 0 1 3 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z"/>
+                        <path d="M8 11h.01"/>
+                        <path d="M12 11h.01"/>
+                        <path d="M16 11h.01"/>
+                    </svg>
+                </span>
+                Forum
+            </a>
+        </li>
+
+        <li>
+            <a href="#">
+                <span class="nav-icon" aria-hidden="true">
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <path d="M3 11v2a2 2 0 0 0 2 2h2l7 4V5L7 9H5a2 2 0 0 0-2 2Z"/>
+                        <path d="M14 8.5a4 4 0 0 1 0 7"/>
+                        <path d="M7 15l1.5 5h2L9 15"/>
+                    </svg>
+                </span>
+                Announcements
+            </a>
+        </li>
+
+        <!-- PROFILE -->
+        <li class="profile-wrapper">
+
+            <button
+                type="button"
+                class="profile-button"
+                id="profileButton"
+                title="Profile"
+                aria-label="Profile"
+                aria-expanded="false"
+                aria-controls="profileDropdown"
+            >
+                <span
+                    id="navbarAvatar"
+                    class="user-icon"
+                    aria-hidden="true"
+                ></span>
+            </button>
+
+            <div
+                class="profile-dropdown"
+                id="profileDropdown"
+            >
+
+                <div class="profile-info">
+
+                    <strong id="navProfileName">
+                        Student Profile
+                    </strong>
+
+                    <span>
+                        Your learning space
+                    </span>
+
+                </div>
+
+                <a
+                    href="profile.html"
+                    class="dropdown-link active-dropdown"
+                >
+                    <span class="dropdown-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="8" r="3.5"/>
+                            <path d="M5 20c.8-4 3-6 7-6s6.2 2 7 6"/>
+                        </svg>
+                    </span>
+
+                    <span>Profile</span>
+                </a>
+
+                <a
+                    href="dashboard.html"
+                    class="dropdown-link"
+                >
+                    <span class="dropdown-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+                            <path d="M8 6h8"/>
+                            <path d="M8 10h8"/>
+                        </svg>
+                    </span>
+
+                    <span>My Learning</span>
+                </a>
+
+                <a
+                    href="settings.html"
+                    class="dropdown-link settings-link"
+                >
+                    <span
+                        class="dropdown-icon settings-symbol"
+                        aria-hidden="true"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+                            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20h-2.54v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.14 15a1.7 1.7 0 0 0-1.56-1.03H6.5v-2.54h.08A1.7 1.7 0 0 0 8.14 10a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06 1.88.34A1.7 1.7 0 0 0 12.5 5.1V5h2.54v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06A1.7 1.7 0 0 0 19.4 10a1.7 1.7 0 0 0 1.56 1.03H21v2.54h-.04A1.7 1.7 0 0 0 19.4 15Z"/>
+                        </svg>
+                    </span>
+
+                    <span>Settings</span>
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+                <a
+                    href="index.html"
+                    class="dropdown-link logout"
+                    id="logoutLink"
+                >
+                    <span class="dropdown-icon" aria-hidden="true">
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M10 17l5-5-5-5"/>
+                            <path d="M15 12H3"/>
+                            <path d="M21 19V5a2 2 0 0 0-2-2h-6"/>
+                        </svg>
+                    </span>
+
+                    <span>Logout</span>
+                </a>
+
+            </div>
+
+        </li>
+
+    </ul>
+
+</nav>
+<main class="page">
+
+    <header class="page-header">
+
+        <div class="eyebrow">
+            AlumniForge
+        </div>
+
+        <h1>My Profile</h1>
+
+        <p>
+            Manage your profile, education, skills and learning information.
+        </p>
+
+    </header>
+
+
+    <!-- PROFILE HEADER -->
+
+    <section class="profile-card profile-header">
+
+        <div class="profile-photo-area">
+
+            <div class="profile-photo">
+
+                <img
+                    id="profilePhoto"
+                    src=""
+                    alt="Profile Photo"
+                >
+
+                <div
+                    id="photoInitial"
+                    class="photo-initial"
+                >
+                    S
+                </div>
+
+            </div>
+
+            
+
+        </div>
+
+        <div class="profile-info">
+
+            <label for="fullName">
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="fullName"
+                readonly
+            >
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                readonly
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+            <span class="section-kicker">About</span>
+
+            <h2>About Me</h2>
+
+            <p>
+                Tell the AlumniForge community a little about yourself.
+            </p>
+        </div>
+
+        <textarea
+            id="aboutMe"
+            rows="5"
+            placeholder="Write a short summary about yourself..."
+        ></textarea>
+
+        <div class="section-actions">
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="about"
+            >
+                Save About
+            </button>
+        </div>
+
+    </section>
+
+
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+            <span class="section-kicker">Personal</span>
+
+            <h2>Personal Information</h2>
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label for="college">College / University</label>
+
+                <input
+                    type="text"
+                    id="college"
+                    placeholder="College / University name"
+                >
+            </div>
+
+            <div>
+                <label for="phone">Phone</label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Your phone number"
+                >
+            </div>
+
+            <div>
+                <label for="location">Location</label>
+
+                <input
+                    type="text"
+                    id="location"
+                    placeholder="City, Country"
+                >
+            </div>
+
+            <div>
+                <label for="dateOfBirth">Date of Birth</label>
+
+                <input
+                    type="date"
+                    id="dateOfBirth"
+                >
+            </div>
+
+            <div>
+                <label for="gender">Gender</label>
+
+                <select id="gender">
+                    <option value="">Prefer not to say</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="section-actions">
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="personal"
+            >
+                Save Personal Info
+            </button>
+        </div>
+
+    </section>
+    <section
+        class="profile-card"
+        id="registrationInfoSection"
+        style="display: none;"
+    >
+
+        <div class="section-heading">
+
+            <span class="section-kicker">Account</span>
+
+            <h2>Registration Information</h2>
+
+            <p>
+                Set when you registered. These details are locked and can only
+                be changed by deleting your account.
+            </p>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label for="regCollegeEmail">
+                    College Email
+                </label>
+
+                <input
+                    type="email"
+                    id="regCollegeEmail"
+                    readonly
+                >
+            </div>
+
+            <div>
+                <label for="regDateOfBirth">
+                    Date of Birth
+                </label>
+
+                <input
+                    type="text"
+                    id="regDateOfBirth"
+                    readonly
+                >
+            </div>
+
+            <div>
+                <label for="regGraduationYear">
+                    Graduation Year
+                </label>
+
+                <input
+                    type="text"
+                    id="regGraduationYear"
+                    readonly
+                >
+            </div>
+
+            <div>
+                <label for="regBranch">
+                    Branch / Department
+                </label>
+
+                <input
+                    type="text"
+                    id="regBranch"
+                    readonly
+                >
+            </div>
+
+        </div>
+
+    </section>
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">Education</span>
+
+            <h2>Education</h2>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label for="degree">Degree / Course</label>
+
+                <input
+                    type="text"
+                    id="degree"
+                    placeholder="B.Tech, BCA, MCA..."
+                >
+            </div>
+
+            <div>
+                <label for="educationCollege">
+                    College / University
+                </label>
+
+                <input
+                    type="text"
+                    id="educationCollege"
+                    placeholder="College / University"
+                >
+            </div>
+
+            <div>
+                <label for="branch">Branch / Department</label>
+
+                <input
+                    type="text"
+                    id="branch"
+                    placeholder="Computer Science, IT..."
+                >
+            </div>
+
+            <div>
+                <label for="startYear">Start Year</label>
+
+                <input
+                    type="number"
+                    id="startYear"
+                    placeholder="2024"
+                    min="1900"
+                    max="2100"
+                >
+            </div>
+
+            <div>
+                <label for="endYear">End Year</label>
+
+                <input
+                    type="number"
+                    id="endYear"
+                    placeholder="2028"
+                    min="1900"
+                    max="2100"
+                >
+            </div>
+
+        </div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="education"
+            >
+                Save Education
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">Skills</span>
+
+            <h2>Skills</h2>
+
+            <p>
+                Select your skills or add your own.
+            </p>
+
+        </div>
+
+        <div id="skillOptions" class="skill-options">
+
+            <label>
+                <input type="checkbox" value="HTML">
+                HTML
+            </label>
+
+            <label>
+                <input type="checkbox" value="CSS">
+                CSS
+            </label>
+
+            <label>
+                <input type="checkbox" value="JavaScript">
+                JavaScript
+            </label>
+
+            <label>
+                <input type="checkbox" value="Python">
+                Python
+            </label>
+
+            <label>
+                <input type="checkbox" value="Java">
+                Java
+            </label>
+
+            <label>
+                <input type="checkbox" value="C++">
+                C++
+            </label>
+
+            <label>
+                <input type="checkbox" value="React">
+                React
+            </label>
+
+            <label>
+                <input type="checkbox" value="Node.js">
+                Node.js
+            </label>
+
+            <label>
+                <input type="checkbox" value="SQL">
+                SQL
+            </label>
+
+            <label>
+                <input type="checkbox" value="Git">
+                Git
+            </label>
+
+            <label>
+                <input type="checkbox" value="Data Science">
+                Data Science
+            </label>
+
+            <label>
+                <input type="checkbox" value="Machine Learning">
+                Machine Learning
+            </label>
+
+            <label>
+                <input type="checkbox" value="Communication">
+                Communication
+            </label>
+
+            <label>
+                <input type="checkbox" value="Leadership">
+                Leadership
+            </label>
+
+        </div>
+
+        <div class="add-skill">
+
+            <input
+                type="text"
+                id="customSkill"
+                placeholder="Add another skill"
+            >
+
+            <button
+                type="button"
+                id="addSkillBtn"
+                class="outline-btn"
+            >
+                Add Skill
+            </button>
+
+        </div>
+
+        <div
+            id="selectedSkills"
+            class="selected-skills"
+        ></div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="skills"
+            >
+                Save Skills
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESUME -->
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Career
+            </span>
+
+            <h2>Add Your Resume</h2>
+
+            <p>
+                Upload your resume to showcase your experience and skills.
+            </p>
+
+        </div>
+
+        <input
+            type="file"
+            id="resumeInput"
+            accept=".pdf,.doc,.docx"
+        >
+
+        <div class="resume-box">
+
+            <span>Current Resume:</span>
+
+            <strong id="resumeName">
+                No resume selected
+            </strong>
+
+        </div>
+
+        <div class="inline-actions">
+
+            <button
+                type="button"
+                id="removeResumeBtn"
+                class="outline-btn danger-btn"
+            >
+                Remove Resume
+            </button>
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="resume"
+            >
+                Save Resume
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Career
+            </span>
+
+            <h2>Experience</h2>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label for="experienceRole">
+                    Role / Position
+                </label>
+
+                <input
+                    type="text"
+                    id="experienceRole"
+                    placeholder="Software Intern"
+                >
+            </div>
+
+            <div>
+                <label for="experienceOrganization">
+                    Organization
+                </label>
+
+                <input
+                    type="text"
+                    id="experienceOrganization"
+                    placeholder="Organization name"
+                >
+            </div>
+
+            <div>
+                <label for="experienceDuration">
+                    Duration
+                </label>
+
+                <input
+                    type="text"
+                    id="experienceDuration"
+                    placeholder="June 2025 - August 2025"
+                >
+            </div>
+
+        </div>
+
+        <label for="experienceDescription">
+            Description
+        </label>
+
+        <textarea
+            id="experienceDescription"
+            rows="4"
+            placeholder="Describe your responsibilities..."
+        ></textarea>
+
+        <button
+            type="button"
+            id="addExperienceBtn"
+            class="outline-btn content-add-btn"
+        >
+            Add Experience
+        </button>
+
+        <div
+            id="experienceList"
+            class="item-list"
+        ></div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="experience"
+            >
+                Save Experience
+            </button>
+
+        </div>
+
+    </section>
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Achievements
+            </span>
+
+            <h2>Certifications</h2>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label for="certificateName">
+                    Certificate Name
+                </label>
+
+                <input
+                    type="text"
+                    id="certificateName"
+                    placeholder="Certificate name"
+                >
+            </div>
+
+            <div>
+                <label for="certificateIssuer">
+                    Issued By
+                </label>
+
+                <input
+                    type="text"
+                    id="certificateIssuer"
+                    placeholder="Organization"
+                >
+            </div>
+
+            <div>
+                <label for="certificateYear">
+                    Year
+                </label>
+
+                <input
+                    type="number"
+                    id="certificateYear"
+                    placeholder="2026"
+                    min="1900"
+                    max="2100"
+                >
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            id="addCertificateBtn"
+            class="outline-btn content-add-btn"
+        >
+            Add Certification
+        </button>
+
+        <div
+            id="certificateList"
+            class="item-list"
+        ></div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="certifications"
+            >
+                Save Certifications
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Learning
+            </span>
+
+            <h2>AlumniForge Courses</h2>
+
+            <p>
+                Courses you have enrolled in on AlumniForge.
+            </p>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label for="courseName">
+                    Course
+                </label>
+
+                <select id="courseName">
+
+                    <option value="">
+                        Select a course
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Python Programming">
+                        Python Programming
+                    </option>
+
+                    <option value="JavaScript">
+                        JavaScript
+                    </option>
+
+                    <option value="Data Science">
+                        Data Science
+                    </option>
+
+                    <option value="Machine Learning">
+                        Machine Learning
+                    </option>
+
+                    <option value="Artificial Intelligence">
+                        Artificial Intelligence
+                    </option>
+
+                    <option value="DSA">
+                        Data Structures & Algorithms
+                    </option>
+
+                    <option value="Database Management">
+                        Database Management
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label for="courseStatus">
+                    Status
+                </label>
+
+                <select id="courseStatus">
+
+                    <option value="Enrolled">
+                        Enrolled
+                    </option>
+
+                    <option value="In Progress">
+                        In Progress
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <button
+            type="button"
+            id="addCourseBtn"
+            class="outline-btn content-add-btn"
+        >
+            Add Course
+        </button>
+
+        <div
+            id="courseList"
+            class="item-list"
+        ></div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="courses"
+            >
+                Save Courses
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Progress
+            </span>
+
+            <h2>Learning & Progress</h2>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label for="coursesCompleted">
+                    Courses Completed
+                </label>
+
+                <input
+                    type="number"
+                    id="coursesCompleted"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+            <div>
+
+                <label for="coursesInProgress">
+                    Courses In Progress
+                </label>
+
+                <input
+                    type="number"
+                    id="coursesInProgress"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+            <div class="full">
+
+                <label for="learningInterests">
+                    Learning Interests
+                </label>
+
+                <input
+                    type="text"
+                    id="learningInterests"
+                    placeholder="Web Development, AI, Data Science"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="progress"
+            >
+                Save Progress
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Community
+            </span>
+
+            <h2>Contributions</h2>
+
+        </div>
+
+        <p class="card-description">
+            Your contributions to the AlumniForge community will appear here.
+        </p>
+
+        <div class="stats-grid">
+
+            <div class="stat-box">
+                <strong id="contributionPosts">0</strong>
+                <span>Posts</span>
+            </div>
+
+            <div class="stat-box">
+                <strong id="contributionComments">0</strong>
+                <span>Comments</span>
+            </div>
+
+            <div class="stat-box">
+                <strong id="contributionResources">0</strong>
+                <span>Resources Shared</span>
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Professional
+            </span>
+
+            <h2>Professional Links</h2>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label for="linkedin">
+                    LinkedIn
+                </label>
+
+                <input
+                    type="url"
+                    id="linkedin"
+                    placeholder="https://linkedin.com/in/username"
+                >
+
+            </div>
+
+            <div>
+
+                <label for="github">
+                    GitHub
+                </label>
+
+                <input
+                    type="url"
+                    id="github"
+                    placeholder="https://github.com/username"
+                >
+
+            </div>
+
+            <div class="full">
+
+                <label for="portfolio">
+                    Portfolio
+                </label>
+
+                <input
+                    type="url"
+                    id="portfolio"
+                    placeholder="https://yourportfolio.com"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="links"
+            >
+                Save Links
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Performance
+            </span>
+
+            <h2>Quiz Record</h2>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+
+                <label for="quizzesAttempted">
+                    Quizzes Attempted
+                </label>
+
+                <input
+                    type="number"
+                    id="quizzesAttempted"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+            <div>
+
+                <label for="quizzesCompleted">
+                    Quizzes Completed
+                </label>
+
+                <input
+                    type="number"
+                    id="quizzesCompleted"
+                    min="0"
+                    value="0"
+                >
+
+            </div>
+
+            <div>
+
+                <label for="averageScore">
+                    Average Score (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="averageScore"
+                    min="0"
+                    max="100"
+                    value="0"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="quiz"
+            >
+                Save Quiz Record
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="profile-card">
+
+        <div class="section-heading">
+
+            <span class="section-kicker">
+                Privacy
+            </span>
+
+            <h2>Profile Visibility</h2>
+
+            <p>
+                Choose who can view your profile.
+            </p>
+
+        </div>
+
+        <select id="profileVisibility">
+
+            <option value="public">
+                Public
+            </option>
+
+            <option value="private">
+                Private
+            </option>
+
+            <option value="community">
+                Community Members
+            </option>
+
+        </select>
+
+        <div class="section-actions">
+
+            <button
+                type="button"
+                class="section-save-btn"
+                data-section="visibility"
+            >
+                Save Visibility
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN SAVE -->
+
+    <div class="profile-actions">
+
+        <button
+            type="button"
+            id="resetProfileBtn"
+            class="reset-btn"
+        >
+            Reset
+        </button>
+
+        <button
+            type="button"
+            id="saveProfileBtn"
+            class="save-btn"
+        >
+            Save All Changes
+        </button>
+
+    </div>
+    <div
+        id="profileToast"
+        class="profile-toast"
+        role="status"
+        aria-live="polite"
+    ></div>
+
+</main>
+
+
+<script type="module" src="profile.js"></script>
+
+</body>
+</html>
