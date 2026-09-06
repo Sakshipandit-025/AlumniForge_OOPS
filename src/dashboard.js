@@ -23,6 +23,21 @@ if (!clerk.isSignedIn) {
     const branch = user?.branch;
     const role = user?.role;
     const createdAt = user?.createdAt;
+    const navProfileName =
+    document.getElementById("navProfileName");
+
+const navProfileEmail =
+    document.getElementById("navProfileEmail");
+
+if (navProfileName) {
+    navProfileName.textContent =
+        name || "Student Profile";
+}
+
+if (navProfileEmail) {
+    navProfileEmail.textContent =
+        email || "Your learning space";
+}
 
     console.log("ALUMNIFORGE USER:", user);
     console.log("Name:", name);
@@ -35,13 +50,23 @@ if (!clerk.isSignedIn) {
     console.log("Created at:", createdAt);
 }
 
-//test
-const signOutButton = document.createElement("button");
-signOutButton.textContent = "Test Sign Out";
 
-signOutButton.addEventListener("click", async () => {
-    await clerk.signOut();
-    window.location.href = "/login.html";
-});
 
-document.body.appendChild(signOutButton);
+
+
+// Logout part 
+
+const logoutLink = document.getElementById("logoutLink");
+
+if (logoutLink) {
+    logoutLink.addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        try {
+            await clerk.signOut();
+            window.location.href = "/login.html";
+        } catch (error) {
+            console.error("LOGOUT FAILED:", error);
+        }
+    });
+}

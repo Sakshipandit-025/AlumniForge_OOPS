@@ -3,12 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alumini Forge</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  
+  <title>AlumniForge | Dashboard</title>
+
+  <script>
+    (() => {
+      const theme =
+        localStorage.getItem("alumniForgeTheme") || "light";
+
+      const shouldUseDark =
+        theme === "dark" ||
+        (
+          theme === "system" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        );
+
+      if (shouldUseDark) {
+        document.documentElement.classList.add("dark");
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
     :root {
       --ink: #10261f;
@@ -16,9 +39,47 @@
       --mint: #dff5e7;
       --lime: #b9f36c;
       --paper: #f7f8f3;
+
       --line: rgba(16, 38, 31, 0.12);
       --muted: #60736d;
+
+      --danger: #a94a4a;
+
+      --surface: #ffffff;
+      --surface-soft: #effaf2;
+
+      --nav-text: #345149;
+      --card-shadow: rgba(16, 38, 31, 0.045);
+
+      --nav-bg: rgba(255, 255, 255, 0.92);
     }
+
+    /* =========================
+       DARK THEME
+    ========================== */
+
+    html.dark {
+      --ink: #edf7f1;
+      --forest: #dff5e7;
+      --mint: #193b2f;
+      --lime: #b9f36c;
+      --paper: #0d1713;
+
+      --line: rgba(223, 245, 231, 0.12);
+      --muted: #9cafa5;
+
+      --surface: #14231d;
+      --surface-soft: #1b3028;
+
+      --nav-text: #c8dcd2;
+      --card-shadow: rgba(0, 0, 0, 0.22);
+
+      --nav-bg: rgba(20, 35, 29, 0.94);
+    }
+
+    /* =========================
+       RESET
+    ========================== */
 
     * {
       margin: 0;
@@ -26,47 +87,540 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       min-width: 320px;
       background: var(--paper);
       color: var(--ink);
       font-family: "DM Sans", Arial, sans-serif;
+
+      transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .navbar {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 72px;
+
+      margin: 18px auto 0;
+      padding: 0 14px 0 22px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+
+      position: relative;
+      z-index: 50;
+
+      background: var(--nav-bg);
+
+      border: 1px solid var(--line);
+      border-radius: 18px;
+
+      box-shadow:
+        0 10px 35px rgba(21, 61, 49, 0.07);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* =========================
+       BRAND
+    ========================== */
+
+    .navbar-brand {
+      color: var(--forest);
+
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 700;
+
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+
+    .navbar-brand::before {
+      content: "✦";
+      color: #62a33a;
+
+      font-family: "DM Sans", Arial, sans-serif;
+      font-size: 1rem;
+
+      margin-right: 0.45rem;
+    }
+
+    /* =========================
+       NAV MENU
+    ========================== */
+
+    .navbar-menu {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      list-style: none;
+    }
+
+    .navbar-menu > li {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-menu > li > a {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 9px 12px;
+
+      color: var(--nav-text);
+
+      font-size: 0.88rem;
+      font-weight: 600;
+
+      border-radius: 10px;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .navbar-menu > li > a:hover,
+    .navbar-menu .active {
+      color: var(--forest);
+      background: var(--mint);
+    }
+
+    /* =========================
+       NAV ICONS
+    ========================== */
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+
+      min-width: 18px;
+      min-height: 18px;
+
+      flex: 0 0 18px;
+
+      display: inline-grid;
+      place-items: center;
+
+      color: currentColor;
+    }
+
+    .nav-icon svg {
+      width: 18px;
+      height: 18px;
+
+      display: block;
+      overflow: visible;
+    }
+
+    /* =========================
+       PROFILE
+    ========================== */
+
+    .profile-wrapper {
+      position: relative;
+    }
+
+    .profile-button {
+      width: 42px;
+      height: 42px;
+
+      min-width: 42px;
+      min-height: 42px;
+
+      padding: 0;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--forest);
+      background: var(--mint);
+
+      border: 2px solid var(--line);
+      border-radius: 50%;
+
+      cursor: pointer;
+      overflow: hidden;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .profile-button:hover {
+      border-color: var(--forest);
+      transform: translateY(-1px);
+      background: var(--mint);
+    }
+
+    .profile-button:focus-visible {
+      outline: 3px solid rgba(185, 243, 108, 0.35);
+      outline-offset: 2px;
+    }
+
+    /* =========================
+       USER ICON
+    ========================== */
+
+    .user-icon {
+      width: 20px;
+      height: 20px;
+
+      position: relative;
+      display: block;
+
+      color: var(--forest);
+    }
+
+    .user-icon::before {
+      content: "";
+
+      position: absolute;
+
+      width: 7px;
+      height: 7px;
+
+      top: 1px;
+      left: 6px;
+
+      border: 1.7px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .user-icon::after {
+      content: "";
+
+      position: absolute;
+
+      width: 14px;
+      height: 7px;
+
+      left: 3px;
+      bottom: 1px;
+
+      border: 1.7px solid currentColor;
+      border-bottom: 0;
+
+      border-radius: 10px 10px 0 0;
+    }
+
+    /* =========================
+       PROFILE PHOTO
+    ========================== */
+
+    .user-icon.has-photo {
+      width: 100%;
+      height: 100%;
+
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+    .user-icon.has-photo::before,
+    .user-icon.has-photo::after {
+      display: none;
+    }
+
+    .user-icon.has-photo img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+      object-fit: cover;
+
+      border-radius: 50%;
+    }
+
+    /* =========================
+       PROFILE DROPDOWN
+    ========================== */
+
+    .profile-dropdown {
+      position: absolute;
+
+      top: calc(100% + 12px);
+      right: 0;
+
+      width: 220px;
+      padding: 8px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--line);
+      border-radius: 16px;
+
+      box-shadow:
+        0 18px 45px rgba(16, 38, 31, 0.14),
+        0 4px 12px rgba(16, 38, 31, 0.05);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform:
+        translateY(-7px)
+        scale(0.98);
+
+      transform-origin: top right;
+
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+    }
+
+    .profile-wrapper.open .profile-dropdown {
+      opacity: 1;
+      visibility: visible;
+
+      transform:
+        translateY(0)
+        scale(1);
+    }
+
+    .profile-dropdown::before {
+      content: "";
+
+      position: absolute;
+
+      top: -6px;
+      right: 13px;
+
+      width: 11px;
+      height: 11px;
+
+      background: var(--surface);
+
+      border-left: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+
+      transform: rotate(45deg);
+    }
+
+    /* =========================
+       PROFILE INFO
+    ========================== */
+
+    .profile-info {
+      padding: 11px 12px 13px;
+
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 6px;
+    }
+
+    .profile-info strong {
+      display: block;
+
+      color: var(--forest);
+
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .profile-info span {
+      display: block;
+
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 0.76rem;
+    }
+
+    /* =========================
+       DROPDOWN LINKS
+    ========================== */
+
+    .dropdown-link {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+
+      gap: 11px;
+
+      padding: 10px 11px;
+
+      color: var(--nav-text);
+
+      font-size: 0.84rem;
+      font-weight: 500;
+
+      border-radius: 10px;
+
+      transition:
+        background 0.25s ease,
+        color 0.25s ease;
+    }
+
+    .dropdown-link:hover {
+      background: var(--mint);
+      color: var(--forest);
+    }
+
+    .dropdown-icon {
+      width: 18px;
+      height: 18px;
+
+      min-width: 18px;
+      flex: 0 0 18px;
+
+      display: inline-grid;
+      place-items: center;
+
+      color: #52756a;
+
+      font-size: 0.9rem;
+    }
+
+    .dropdown-icon svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+
+    /* =========================
+       SETTINGS
+    ========================== */
+
+    .settings-link {
+      position: relative;
+    }
+
+    .settings-link .settings-symbol {
+      width: 28px;
+      height: 28px;
+
+      background: var(--surface-soft);
+
+      border: 1px solid #c5e4cf;
+      border-radius: 8px;
+
+      transition:
+        transform 0.4s ease,
+        background 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .settings-link:hover .settings-symbol {
+      background: var(--lime);
+      border-color: var(--lime);
+
+      transform: rotate(70deg);
+    }
+
+    /* =========================
+       LOGOUT
+    ========================== */
+
+    .dropdown-link.logout {
+      color: var(--danger);
+    }
+
+    .dropdown-link.logout:hover {
+      background: #fff1f1;
+      color: #963d3d;
+    }
+
+    html.dark .dropdown-link.logout:hover {
+      background: rgba(169, 74, 74, 0.14);
+    }
+
+    .dropdown-divider {
+      height: 1px;
+
+      margin: 6px 4px;
+
+      background: var(--line);
+    }
+
+    /* =========================
+       HERO HEADER
+    ========================== */
 
     header {
       max-width: 1180px;
       min-height: 320px;
+
       margin: 18px auto 0;
       padding: 76px 30px;
+
       position: relative;
       overflow: hidden;
+
       display: grid;
       place-items: center;
+
       text-align: center;
       color: #fff;
+
       border-radius: 28px;
-      background: linear-gradient(130deg, #0d3428 0%, #195342 54%, #0e2a22 100%);
-      box-shadow: 0 25px 50px rgba(16, 48, 39, 0.18);
+
+      background:
+        linear-gradient(
+          130deg,
+          #0d3428 0%,
+          #195342 54%,
+          #0e2a22 100%
+        );
+
+      box-shadow:
+        0 25px 50px rgba(16, 48, 39, 0.18);
     }
 
     header::before {
       content: "";
+
       position: absolute;
+
       width: 440px;
       height: 440px;
+
       top: -250px;
       right: -120px;
+
       border: 70px solid rgba(185, 243, 108, 0.16);
       border-radius: 50%;
     }
 
     header::after {
       content: "";
+
       position: absolute;
+
       width: 220px;
       height: 220px;
+
       bottom: -120px;
       left: 8%;
+
       border: 42px solid rgba(185, 243, 108, 0.12);
       border-radius: 50%;
     }
@@ -79,38 +633,55 @@
 
     header h1 {
       font-family: "Playfair Display", Georgia, serif;
+
       font-size: clamp(3rem, 7vw, 5.3rem);
+
       line-height: 0.98;
       letter-spacing: -0.065em;
     }
 
     header h1::before {
-      content: "LEARNING HUB";
+      content: "STUDENT DASHBOARD";
+
       display: block;
       margin-bottom: 19px;
+
       color: var(--lime);
+
       font-family: "DM Sans", Arial, sans-serif;
+
       font-size: 0.72rem;
       font-weight: 700;
+
       letter-spacing: 0.2em;
     }
 
     header p {
       margin-top: 22px;
+
       color: #d6e9df;
       font-size: 1.05rem;
     }
 
+    /* =========================
+       CONTENT
+    ========================== */
+
     .container {
       width: min(1120px, calc(100% - 40px));
+
       margin: 0 auto;
+
       padding: 44px 0 85px;
     }
 
     .section-title {
       margin: 40px 0 16px;
+
       color: var(--forest);
+
       font-family: "Playfair Display", Georgia, serif;
+
       font-size: 2rem;
       letter-spacing: -0.045em;
     }
@@ -119,82 +690,201 @@
       margin-top: 0;
     }
 
+    /* =========================
+       GRID
+    ========================== */
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
       gap: 16px;
     }
 
+    /* =========================
+       RESOURCE CARDS
+    ========================== */
+
     .card {
       min-height: 168px;
+
       padding: 25px 24px;
+
       position: relative;
       overflow: hidden;
+
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      background: #fff;
+
+      background: var(--surface);
+
       border: 1px solid var(--line);
       border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(16, 38, 31, 0.045);
+
+      box-shadow:
+        0 10px 25px var(--card-shadow);
+
       cursor: pointer;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
     }
 
     .card::before {
       content: "↗";
+
       position: absolute;
+
       top: 19px;
       right: 20px;
+
       width: 32px;
       height: 32px;
+
       display: grid;
       place-items: center;
+
       color: #3a6b50;
       background: var(--mint);
+
       border-radius: 50%;
+
       font-size: 1.1rem;
+
       transition: 0.25s ease;
     }
 
     .card:hover {
       border-color: #a7d9b5;
+
       transform: translateY(-7px);
-      box-shadow: 0 20px 35px rgba(16, 38, 31, 0.11);
+
+      box-shadow:
+        0 20px 35px rgba(16, 38, 31, 0.11);
     }
 
     .card:hover::before {
       color: var(--forest);
       background: var(--lime);
+
       transform: rotate(45deg);
     }
 
     .card h3 {
       margin-bottom: 8px;
+
       color: var(--forest);
+
       font-family: "Playfair Display", Georgia, serif;
+
       font-size: 1.42rem;
       font-weight: 700;
+
       line-height: 1.2;
       letter-spacing: -0.04em;
     }
 
     .card p {
       color: var(--muted);
+
       font-size: 0.93rem;
       line-height: 1.5;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 850px) {
+      .navbar {
+        min-height: auto;
+
+        padding: 16px;
+
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-menu {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .profile-dropdown {
+        right: auto;
+        left: 0;
+      }
+
+      .profile-dropdown::before {
+        left: 13px;
+        right: auto;
+      }
+
+      .navbar-menu > li > a {
+        padding: 7px 9px;
+      }
     }
 
     @media (max-width: 650px) {
+      .navbar {
+        width: calc(100% - 24px);
+
+        margin: 12px auto 0;
+
+        border-radius: 16px;
+      }
+
+      .navbar-brand {
+        font-size: 1.35rem;
+      }
+
+      .navbar-menu {
+        gap: 2px;
+      }
+
+      .navbar-menu > li > a {
+        font-size: 0.76rem;
+        padding: 6px 7px;
+      }
+
+      .nav-icon {
+        width: 15px;
+        height: 15px;
+
+        min-width: 15px;
+        min-height: 15px;
+
+        flex-basis: 15px;
+      }
+
+      .nav-icon svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      .profile-button {
+        width: 37px;
+        height: 37px;
+
+        min-width: 37px;
+        min-height: 37px;
+      }
+
+      .profile-dropdown {
+        width: 205px;
+      }
+
       header {
         min-height: 285px;
+
         margin: 12px 12px 0;
         padding: 65px 22px;
+
         border-radius: 22px;
       }
 
@@ -204,6 +894,7 @@
 
       .container {
         width: calc(100% - 28px);
+
         padding-top: 32px;
       }
 
@@ -220,93 +911,952 @@
 </head>
 
 <body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <nav class="navbar">
+
+    <a
+      href="dashboard.html"
+      class="navbar-brand"
+    >
+      AlumniForge
+    </a>
+
+    <ul class="navbar-menu">
+
+      <!-- DASHBOARD -->
+      <li>
+        <a
+          href="dashboard.html"
+          class="active"
+          data-i18n="dashboard"
+        >
+          Dashboard
+        </a>
+      </li>
+
+      <!-- COMMUNITY -->
+      <li>
+        <a
+          href="#"
+          data-i18n="community"
+        >
+          <span class="nav-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </span>
+
+          <span>Community</span>
+        </a>
+      </li>
+
+      <!-- FORUM -->
+      <li>
+        <a
+          href="#"
+          data-i18n="forum"
+        >
+          <span class="nav-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"
+              />
+            </svg>
+          </span>
+
+          <span>Forum</span>
+        </a>
+      </li>
+
+      <!-- ANNOUNCEMENTS -->
+      <li>
+        <a
+          href="#"
+          data-i18n="announcements"
+        >
+          <span class="nav-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M3 11v2a2 2 0 0 0 2 2h1l2 5h3l-2-5h2l8 4V6l-8 4H5a2 2 0 0 0-2 1Z"
+              />
+              <path d="M19 9.5a4 4 0 0 1 0 5" />
+            </svg>
+          </span>
+
+          <span>Announcements</span>
+        </a>
+      </li>
+
+      <!-- PROFILE -->
+      <li class="profile-wrapper">
+
+        <button
+          type="button"
+          class="profile-button"
+          id="profileButton"
+          title="Profile"
+          aria-label="Profile"
+          aria-expanded="false"
+          aria-controls="profileDropdown"
+        >
+          <span
+            class="user-icon"
+            id="navbarAvatar"
+          ></span>
+        </button>
+
+        <div
+          class="profile-dropdown"
+          id="profileDropdown"
+        >
+        <div class="profile-info">
+  <strong id="navProfileName">
+    Student Profile
+  </strong>
+
+  <span id="navProfileEmail">
+    Your learning space
+  </span>
+</div>
+
+
+          <!-- PROFILE -->
+          <a
+            href="profile.html"
+            class="dropdown-link"
+          >
+            <span class="dropdown-icon" aria-hidden="true">
+              👤
+            </span>
+
+            <span data-i18n="profile">
+              Profile
+            </span>
+          </a>
+
+          <!-- MY LEARNING -->
+          <a
+            href="dashboard.html"
+            class="dropdown-link"
+          >
+            <span class="dropdown-icon" aria-hidden="true">
+              📚
+            </span>
+
+            <span data-i18n="myLearning">
+              My Learning
+            </span>
+          </a>
+
+          <!-- SETTINGS -->
+          <a
+            href="settings.html"
+            class="dropdown-link settings-link"
+          >
+            <span
+              class="dropdown-icon settings-symbol"
+              aria-hidden="true"
+            >
+              ⚙
+            </span>
+
+            <span data-i18n="settings">
+              Settings
+            </span>
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <!-- LOGOUT -->
+          <a
+            href="#"
+            id="logoutLink"
+            class="dropdown-link logout"
+          >
+            <span class="dropdown-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M10 17l5-5-5-5"></path>
+                <path d="M15 12H3"></path>
+                <path d="M21 19V5a2 2 0 0 0-2-2h-6"></path>
+              </svg>
+            </span>
+
+            <span data-i18n="logout">
+              Logout
+            </span>
+          </a>
+
+        </div>
+      </li>
+
+    </ul>
+  </nav>
+
+
+  <!-- =========================
+       DASHBOARD HEADER
+  ========================== -->
+
   <header>
     <div>
-      <h1>Alumni Forge</h1>
-      <p>All programming resources in one place</p>
+
+      <h1>
+        Alumni Forge
+      </h1>
+
+      <p data-i18n="dashboardSubtitle">
+        Your learning resources, progress and student network in one place
+      </p>
+
     </div>
   </header>
 
+
+  <!-- =========================
+       DASHBOARD CONTENT
+  ========================== -->
+
   <div class="container">
-    <!-- HOME -->
+
     <div id="home">
-      <h2 class="section-title">Programming Languages</h2>
-      <div class="grid" id="languages"></div>
 
-      <h2 class="section-title">Frontend</h2>
-      <div class="grid" id="frontend"></div>
+      <h2
+        class="section-title"
+        data-i18n="programmingLanguages"
+      >
+        Programming Languages
+      </h2>
 
-      <h2 class="section-title">Backend</h2>
-      <div class="grid" id="backend"></div>
+      <div
+        class="grid"
+        id="languages"
+      ></div>
 
-      <h2 class="section-title">DSA</h2>
-      <div class="grid" id="dsa"></div>
+
+      <h2
+        class="section-title"
+        data-i18n="frontend"
+      >
+        Frontend
+      </h2>
+
+      <div
+        class="grid"
+        id="frontend"
+      ></div>
+
+
+      <h2
+        class="section-title"
+        data-i18n="backend"
+      >
+        Backend
+      </h2>
+
+      <div
+        class="grid"
+        id="backend"
+      ></div>
+
+
+      <h2
+        class="section-title"
+        data-i18n="dsa"
+      >
+        DSA
+      </h2>
+
+      <div
+        class="grid"
+        id="dsa"
+      ></div>
+
     </div>
   </div>
 
+
+  <!-- =========================
+       RESOURCE DATA
+  ========================== -->
+
   <script>
+
     const data = {
-      languages: ["C", "Rust", "Java", "Kotlin", "Python", "C++"],
-      frontend: ["HTML", "CSS", "JavaScript"],
-      backend: ["MongoDB", "Express", "React", "Node.js"],
-      dsa: ["DSA"]
+
+      languages: [
+        "C",
+        "Rust",
+        "Java",
+        "Kotlin",
+        "Python",
+        "C++"
+      ],
+
+      frontend: [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React"
+      ],
+
+      backend: [
+        "MongoDB",
+        "Express",
+        "Node.js"
+      ],
+
+      dsa: [
+        "DSA"
+      ]
+
     };
+
 
     const descriptions = {
-      "C": "Foundation of programming & systems",
-      "Rust": "Safe systems programming",
-      "Java": "Backend & enterprise development",
-      "Kotlin": "Modern JVM & Android development",
-      "Python": "General-purpose & scripting",
-      "HTML": "Structure of the web",
-      "CSS": "Styling modern websites",
-      "JavaScript": "Interactive web programming",
-      "C++": "High-performance programming",
-      "MongoDB": "NoSQL database",
-      "Express": "Backend framework",
-      "React": "Frontend library",
-      "Node.js": "JavaScript runtime",
-      "DSA": "Data Structures & Algorithms (Interviews + Practice)"
+
+      "C":
+        "Foundation of programming & systems",
+
+      "Rust":
+        "Safe systems programming",
+
+      "Java":
+        "Backend & enterprise development",
+
+      "Kotlin":
+        "Modern JVM & Android development",
+
+      "Python":
+        "General-purpose & scripting",
+
+      "HTML":
+        "Structure of the web",
+
+      "CSS":
+        "Styling modern websites",
+
+      "JavaScript":
+        "Interactive web programming",
+
+      "C++":
+        "High-performance programming",
+
+      "MongoDB":
+        "NoSQL database",
+
+      "Express":
+        "Backend framework",
+
+      "React":
+        "Frontend library",
+
+      "Node.js":
+        "JavaScript runtime",
+
+      "DSA":
+        "Data Structures & Algorithms (Interviews + Practice)"
+
     };
 
-    function load(section, id) {
-      const el = document.getElementById(id);
 
-      section.forEach(x => {
-        const card = document.createElement("a");
+    /*
+      Explicit URLs are safer than generating URLs
+      automatically because names like C++ and Node.js
+      need special filenames.
+    */
+
+    const courseUrls = {
+
+      "C": "c.html",
+
+      "C++": "cpp.html",
+
+      "Rust": "rust.html",
+
+      "Java": "java.html",
+
+      "Kotlin": "kotlin.html",
+
+      "Python": "python.html",
+
+      "HTML": "html.html",
+
+      "CSS": "css.html",
+
+      "JavaScript": "javascript.html",
+
+      "React": "react.html",
+
+      "MongoDB": "mongodb.html",
+
+      "Express": "express.html",
+
+      "Node.js": "node.html",
+
+      "DSA": "dsa.html"
+
+    };
+
+
+    function load(section, id) {
+
+      const element =
+        document.getElementById(id);
+
+      if (!element) {
+        return;
+      }
+
+      section.forEach(course => {
+
+        const card =
+          document.createElement("a");
+
         card.className = "card";
 
-        if (x === "DSA") {
-          card.href = "dsa.html";
-        } else {
-          card.href = `${x.toLowerCase().replace("++", "pp")}.html`;
-        }
+        /*
+          Same working card-navigation concept
+          as roommate's code, but using explicit URLs.
+        */
 
-        card.innerHTML = `
-          <h3>${x}</h3>
-          <p>${descriptions[x] || "Learning resources"}</p>
-        `;
+        card.href =
+          courseUrls[course] || "#";
 
-        el.appendChild(card);
+
+        const heading =
+          document.createElement("h3");
+
+        heading.textContent =
+          course;
+
+
+        const paragraph =
+          document.createElement("p");
+
+        paragraph.textContent =
+          descriptions[course] ||
+          "Learning resources";
+
+
+        card.appendChild(heading);
+        card.appendChild(paragraph);
+
+        element.appendChild(card);
+
       });
+
     }
+
 
     load(data.languages, "languages");
     load(data.frontend, "frontend");
     load(data.backend, "backend");
     load(data.dsa, "dsa");
+
   </script>
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+
+  <!-- =========================
+       PROFILE DROPDOWN
+  ========================== -->
+
+  <script>
+
+    const profileWrapper =
+      document.querySelector(".profile-wrapper");
+
+    const profileButton =
+      document.getElementById("profileButton");
+
+    const profileDropdown =
+      document.getElementById("profileDropdown");
+
+
+    function closeProfileDropdown() {
+
+      profileWrapper.classList.remove("open");
+
+      profileButton.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+
+    profileButton.addEventListener(
+      "click",
+      function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const isOpen =
+          profileWrapper.classList.toggle("open");
+
+        profileButton.setAttribute(
+          "aria-expanded",
+          isOpen ? "true" : "false"
+        );
+
+      }
+    );
+
+
+    profileDropdown.addEventListener(
+      "click",
+      function(event) {
+
+        event.stopPropagation();
+
+      }
+    );
+
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          !profileWrapper.contains(event.target)
+        ) {
+
+          closeProfileDropdown();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (event.key === "Escape") {
+
+          closeProfileDropdown();
+
+          profileButton.focus();
+
+        }
+
+      }
+    );
+
+  </script>
+
+
+  <!-- =========================
+       GLOBAL ALUMNIFORGE SETTINGS
+  ========================== -->
+
+  <script>
+
+    const THEME_KEY =
+      "alumniForgeTheme";
+
+    const LANGUAGE_KEY =
+      "alumniForgeLanguage";
+
+    const PHOTO_KEY =
+      "alumniForgeProfilePhoto";
+
+
+    /* =========================
+       THEME
+    ========================== */
+
+    function getStoredTheme() {
+
+      return (
+        localStorage.getItem(THEME_KEY) ||
+        "light"
+      );
+
+    }
+
+
+    function applyTheme(theme) {
+
+      const root =
+        document.documentElement;
+
+      const shouldUseDark =
+        theme === "dark" ||
+        (
+          theme === "system" &&
+          window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches
+        );
+
+      root.classList.toggle(
+        "dark",
+        shouldUseDark
+      );
+
+    }
+
+
+    applyTheme(
+      getStoredTheme()
+    );
+
+
+    const systemTheme =
+      window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
+
+
+    systemTheme.addEventListener(
+      "change",
+      function() {
+
+        if (
+          getStoredTheme() === "system"
+        ) {
+
+          applyTheme("system");
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       LANGUAGE
+    ========================== */
+
+    const translations = {
+
+      en: {
+
+        dashboard:
+          "Dashboard",
+
+        community:
+          "Community",
+
+        forum:
+          "Forum",
+
+        announcements:
+          "Announcements",
+
+        studentProfile:
+          "Student Profile",
+
+        learningSpace:
+          "Your learning space",
+
+        profile:
+          "Profile",
+
+        myLearning:
+          "My Learning",
+
+        settings:
+          "Settings",
+
+        logout:
+          "Logout",
+
+        dashboardSubtitle:
+          "Your learning resources, progress and student network in one place",
+
+        programmingLanguages:
+          "Programming Languages",
+
+        frontend:
+          "Frontend",
+
+        backend:
+          "Backend",
+
+        dsa:
+          "DSA"
+
+      },
+
+
+      hi: {
+
+        dashboard:
+          "डैशबोर्ड",
+
+        community:
+          "कम्युनिटी",
+
+        forum:
+          "फोरम",
+
+        announcements:
+          "घोषणाएँ",
+
+        studentProfile:
+          "स्टूडेंट प्रोफ़ाइल",
+
+        learningSpace:
+          "आपकी लर्निंग स्पेस",
+
+        profile:
+          "प्रोफ़ाइल",
+
+        myLearning:
+          "मेरी लर्निंग",
+
+        settings:
+          "सेटिंग्स",
+
+        logout:
+          "लॉगआउट",
+
+        dashboardSubtitle:
+          "आपके लर्निंग रिसोर्सेज़, प्रोग्रेस और स्टूडेंट नेटवर्क एक ही जगह",
+
+        programmingLanguages:
+          "प्रोग्रामिंग लैंग्वेजेज़",
+
+        frontend:
+          "फ्रंटएंड",
+
+        backend:
+          "बैकएंड",
+
+        dsa:
+          "DSA"
+
+      }
+
+    };
+
+
+    function getStoredLanguage() {
+
+      return (
+        localStorage.getItem(
+          LANGUAGE_KEY
+        ) || "en"
+      );
+
+    }
+
+
+    function applyLanguage(language) {
+
+      const lang =
+        translations[language]
+          ? language
+          : "en";
+
+
+      document.documentElement.lang =
+        lang;
+
+
+      document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+          const key =
+            element.dataset.i18n;
+
+          if (
+            translations[lang] &&
+            translations[lang][key]
+          ) {
+
+            element.textContent =
+              translations[lang][key];
+
+          }
+
+        });
+
+    }
+
+
+    applyLanguage(
+      getStoredLanguage()
+    );
+
+
+    /* =========================
+       PROFILE PHOTO
+    ========================== */
+
+    function loadProfilePhoto() {
+
+      const savedPhoto =
+        localStorage.getItem(
+          PHOTO_KEY
+        );
+
+
+      const avatar =
+        document.getElementById(
+          "navbarAvatar"
+        );
+
+
+      if (!avatar) {
+        return;
+      }
+
+
+      if (!savedPhoto) {
+
+        avatar.classList.remove(
+          "has-photo"
+        );
+
+        avatar.innerHTML = "";
+
+        return;
+
+      }
+
+
+      avatar.classList.add(
+        "has-photo"
+      );
+
+      avatar.innerHTML = "";
+
+
+      const image =
+        document.createElement("img");
+
+      image.src =
+        savedPhoto;
+
+      image.alt =
+        "Profile";
+
+
+      avatar.appendChild(
+        image
+      );
+
+    }
+
+
+    loadProfilePhoto();
+
+
+    /* =========================
+       CROSS-TAB SYNC
+    ========================== */
+
+    window.addEventListener(
+      "storage",
+      function(event) {
+
+        if (
+          event.key === THEME_KEY
+        ) {
+
+          applyTheme(
+            event.newValue ||
+            "light"
+          );
+
+        }
+
+
+        if (
+          event.key === LANGUAGE_KEY
+        ) {
+
+          applyLanguage(
+            event.newValue ||
+            "en"
+          );
+
+        }
+
+
+        if (
+          event.key === PHOTO_KEY
+        ) {
+
+          loadProfilePhoto();
+
+        }
+
+      }
+    );
+
+  </script>
+
+
+  <!-- =========================
+       N8N AI CHAT
+       ONLY ONE CHAT INSTANCE
+  ========================== -->
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css"
+    rel="stylesheet"
+  />
 
   <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    import {
+      createChat
+    } from "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js";
+
 
     createChat({
-      webhookUrl: 'https://sakshiaa.app.n8n.cloud/webhook/178831dd-7eff-4673-8bcf-82dc30036caa/chat'
-    });
-  </script>
 
+      webhookUrl:
+        "https://sakshiaa.app.n8n.cloud/webhook/178831dd-7eff-4673-8bcf-82dc30036caa/chat"
+
+    });
+
+  </script>
   <script type="module" src="/src/dashboard.js"></script>
+
 </body>
 </html>
-

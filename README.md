@@ -1,121 +1,214 @@
-# Alumni Forge
+# AlumniForge
 
-Alumni Forge is a learning resource platform that helps students and developers discover curated resources for programming languages and technologies. The project provides a simple and consistent interface for accessing documentation, certification resources, video courses, and developer roadmaps.
-
-## Project Overview
-
-The application starts from `index.js`. It provides the main entry point for the project and connects the different parts of the application.
-The project also includes a login-related page named `network`, a `privacy` page containing the privacy policy, and individual pages dedicated to learning resources for different programming languages and technologies.
-Each technology-specific page follows the same structure and provides relevant documentation, certification or course links, video resources, and a developer roadmap.
-
-## Project Structure
-
-```text
-Alumni-Forge/
-├── index.js
-├── network
-├── privacy
-├── python
-├── react
-├── nodejs
-├── mongodb
-├── kotlin
-├── rust
-└── README.md
-```
-
-The exact file extensions and supporting files may vary depending on the final project configuration.
-
-## Pages and Resources
-The `index.js` file serves as the starting point of the application and provides access to the main Alumni Forge experience.
-The `network` page is responsible for the login-related functionality of the project.
-The `privacy` page contains the application's privacy policy and provides users with information about privacy and data handling.
-The remaining pages provide learning resources for their respective technologies. Currently, the project includes resources for Python, React, Node.js, MongoDB, Kotlin, and Rust.
-Each technology resource page contains the following sections:
-
-* Documentation provides links to official documentation and additional tutorials.
-* Certification provides links to courses and certification-oriented learning platforms.
-* Resources contains curated video courses and tutorials.
-* Roadmap provides a link to a developer roadmap for the respective technology.
-
-## Technologies Covered
-
-Alumni Forge currently provides learning resources for the following technologies:
-
-* Python
-* React
-* Node.js
-* MongoDB
-* Kotlin
-* Rust
-
-The project can be extended by adding additional technology-specific resource pages using the same structure and design system.
-
-## Design
-The resource pages use a consistent visual design throughout the platform. The interface combines a forest-green color palette with a warm off-white background, rounded cards, subtle shadows, and responsive layouts.
-The project uses `Playfair Display` for major headings and `DM Sans` for body text and interface elements. The design also includes interactive hover effects for resource links and video cards.
-The layout is responsive and adapts the resource grid for desktop, tablet, and mobile screens.
+AlumniForge is a learning and community platform for students and alumni. It provides curated learning resources, user profiles, learning progress, quizzes, course reviews, contributions, and a community forum.
 
 ## Features
 
-Alumni Forge provides a centralized place to discover learning resources without requiring users to search for every resource individually. The platform includes official documentation, external learning platforms, curated YouTube videos, and developer roadmaps.
-The project also provides a dedicated login-related page through `network` and a privacy policy through `privacy`.
+- Clerk authentication
+- AlumniForge user profiles stored in Convex
+- Learning resources for different technologies
+- Community forum
+- Forum posts and comments
+- Delete your own forum posts
+- Quiz functionality
+- Learning progress tracking
+- Course reviews
+- Contributions
+- Guest access to learning content
+- User and admin roles
+
+## Tech Stack
+
+- HTML
+- CSS
+- JavaScript
+- Vite
+- Clerk
+- Convex
+
+## Prerequisites
+
+Before running AlumniForge locally, install:
+
+- Node.js
+- Git
 
 ## Getting Started
 
-Clone the repository using Git:
+### 1. Clone the repository
 
-```bash
-git clone <repository-url>
-```
+    git clone https://github.com/Sakshipandit-025/AlumniForge_OOPS.git
+    cd AlumniForge_OOPS
 
-Navigate to the project directory:
+### 2. Install dependencies
 
-```bash
-cd Alumni-Forge
-```
+    npm install
 
-Install the required dependencies if the project includes a `package.json` file:
+### 3. Configure environment variables
 
-```bash
-npm install
-```
+AlumniForge uses Clerk for authentication and Convex for the backend.
 
-Start the application using the appropriate command configured in the project:
+Create a `.env.local` file in the project root.
 
-```bash
-npm start
-```
+Add:
 
-If a development script is available, the application can instead be started with:
+    VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+    VITE_CONVEX_URL=your_convex_url
 
-```bash
-npm run dev
-```
+Do not commit `.env` or `.env.local` files. They are already included in `.gitignore`.
 
-After starting the application, open the local address provided by the development server in a web browser.
+### 4. Configure and start Convex
 
-## Adding New Resources
-New technologies can be added by creating a resource page that follows the existing structure. The page should contain relevant official documentation, reliable certification or course resources, useful video tutorials, and an appropriate developer roadmap.
-The new page should also follow the existing Alumni Forge design so that the platform maintains a consistent appearance across all technologies.
+From the project root, run:
 
-## External Resources
+    npx convex dev
 
-The resource pages contain links to external platforms such as official documentation websites, YouTube, Coursera, Udemy, W3Schools, MDN, and roadmap.sh.
-These external resources are maintained by their respective organizations and creators. Alumni Forge serves as a centralized interface for discovering and accessing these resources.
+Follow the Convex CLI prompts to connect or configure the development deployment.
 
-## Future Improvements
+Keep this terminal running while developing.
 
-Future versions of Alumni Forge could include user authentication, resource bookmarking, learning progress tracking, search and filtering, personalized learning paths, additional technologies, and database-backed resource management.
+### 5. Start the Vite development server
 
-## Contributing
+Open a second terminal in the project directory and run:
 
-Contributions will be welcomed in the future as the project develops further. Contributors can add new technologies, improve existing resources, update outdated links, enhance the user interface, or introduce new features.
-Before submitting a contribution, ensure that the changes follow the existing project structure and maintain consistency with the current design.
+    npm run dev
+
+Vite will provide a local development URL, usually:
+
+    http://localhost:5173
+
+Open the URL in your browser.
+
+## Development
+
+During development, run both Convex and Vite.
+
+### Terminal 1 — Convex
+
+    npx convex dev
+
+### Terminal 2 — Vite
+
+    npm run dev
+
+### Build the project
+
+To create a production build:
+
+    npm run build
+
+### Preview the production build
+
+    npm run preview
+
+## Project Structure
+
+    AlumniForge_OOPS/
+    ├── convex/
+    │   ├── _generated/
+    │   ├── auth.config.ts
+    │   ├── forum.ts
+    │   ├── schema.ts
+    │   ├── testAuth.ts
+    │   └── users.ts
+    ├── src/
+    │   ├── clerk.js
+    │   ├── convex.js
+    │   └── forum.js
+    ├── index.html
+    ├── forum.html
+    ├── package.json
+    ├── package-lock.json
+    ├── .gitignore
+    └── README.md
+
+The project also contains the learning-resource pages and other application pages.
+
+## Authentication
+
+AlumniForge uses:
+
+- Clerk for authentication and identity
+- Convex for AlumniForge user profiles and application data
+
+A user authenticates through Clerk first. AlumniForge then checks whether the user has an associated profile in Convex.
+
+The user's application role is stored in the Convex `users` table.
+
+Users do not choose their role during signup.
+
+## Community Forum
+
+The community forum uses Convex for its backend.
+
+The forum currently supports:
+
+- Creating discussions
+- Viewing discussions
+- Adding comments
+- Displaying discussion authors
+- Deleting your own discussions
+
+Forum functionality is implemented using:
+
+    convex/forum.ts
+    src/forum.js
+    forum.html
+
+## Environment Variables
+
+The following frontend variables are required:
+
+    VITE_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+    VITE_CONVEX_URL=your_convex_url
+
+Never commit actual API keys, tokens, or other private credentials to the repository.
+
+## Git Workflow
+
+When contributing to AlumniForge:
+
+1. Create or switch to the appropriate development branch.
+2. Make your changes.
+3. Test the application locally.
+4. Check your Git status.
+
+    git status
+
+5. Stage your changes:
+
+    git add .
+
+6. Commit your changes:
+
+    git commit -m "Describe your changes"
+
+7. Push your branch:
+
+    git push
+
+## Future Development
+
+Planned and ongoing improvements include:
+
+- Learning progress tracking
+- Quiz and assessment improvements
+- Course reviews
+- Contributions
+- User profile improvements
+- Community forum improvements
+- Admin approval and moderation
+- Announcements
+- Additional learning resources
+- Improved search and navigation
 
 ## License
 
-This project is intended for educational purposes. If a specific open-source license is added to the repository, the license information should be updated in this section.
+This project is currently being developed as part of the AlumniForge project.
 
 ## Contact
-For questions, suggestions, or contributions, please use the project's repository or the contact information provided by the Alumni Forge team.
+
+For project-related questions or contributions, use the project's GitHub repository.
+
+AlumniForge_OOPS:
+https://github.com/Sakshipandit-025/AlumniForge_OOPS
