@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -46,4 +46,814 @@
     <script type="module" src="/src/forumTest.js"></script>
 
 </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AlumniForge Community</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f7f8f3;
+            color: #0f392b;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 68px;
+            background: #0d4032;
+
+            display: flex;
+            align-items: center;
+
+            padding: 0 7%;
+
+            color: white;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 27px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            margin-left: 65px;
+            height: 100%;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 3px;
+
+            background: #b6f04a;
+        }
+
+        .profile {
+            margin-left: auto;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: white;
+            color: #0d4032;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            margin: 14px 2.5% 0;
+
+            height: 245px;
+
+            border-radius: 28px;
+
+            background: #0d4032;
+
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+        }
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 430px;
+            height: 430px;
+
+            border: 60px solid rgba(69, 120, 67, 0.45);
+
+            border-radius: 50%;
+
+            left: 80px;
+            bottom: -390px;
+        }
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 500px;
+            height: 500px;
+
+            border: 85px solid rgba(69, 120, 67, 0.45);
+
+            border-radius: 50%;
+
+            right: -30px;
+            top: -390px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-small {
+            color: #b6f04a;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            letter-spacing: 4px;
+
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            color: white;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 58px;
+            font-weight: 500;
+
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #e7eee9;
+            font-size: 17px;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 78%;
+            max-width: 1050px;
+
+            margin: 25px auto 50px;
+        }
+
+        /* ================= STATUS ================= */
+
+        #status {
+            background: #eaf5ed;
+
+            border: 1px solid #d6e8db;
+
+            border-radius: 12px;
+
+            padding: 11px 15px;
+
+            margin-bottom: 15px;
+
+            color: #315b4a;
+
+            font-size: 13px;
+        }
+
+        /* ================= CREATE POST ================= */
+
+        .create-post {
+            background: white;
+
+            border: 1px solid #dfe7e1;
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            margin-bottom: 28px;
+
+            box-shadow: 0 5px 20px rgba(15, 57, 43, 0.04);
+        }
+
+        .create-header {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            margin-bottom: 17px;
+        }
+
+        .create-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #dff2e5;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+        .create-header h2 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 27px;
+        }
+
+        .create-header p {
+            color: #6c7d76;
+
+            font-size: 13px;
+
+            margin-top: 2px;
+        }
+
+        #post-form input,
+        #post-form textarea {
+            width: 100%;
+
+            border: 1px solid #d8e2dc;
+
+            border-radius: 11px;
+
+            padding: 13px 15px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 14px;
+
+            outline: none;
+
+            margin-bottom: 12px;
+        }
+
+        #post-form input:focus,
+        #post-form textarea:focus {
+            border-color: #0f392b;
+        }
+
+        #post-form textarea {
+            height: 105px;
+            resize: vertical;
+        }
+
+        .post-button-area {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #post-form button {
+            background: #0f392b;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 12px 23px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        #post-form button:hover {
+            background: #174c3b;
+        }
+
+        /* ================= FORUM HEADER ================= */
+
+        .forum-header {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+        .forum-header h2 {
+            font-family: "Playfair Display", serif;
+
+            font-size: 32px;
+        }
+
+        #searchInput {
+            width: 300px;
+
+            border: 1px solid #d8e2dc;
+
+            border-radius: 25px;
+
+            padding: 11px 17px;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 13px;
+
+            outline: none;
+        }
+
+        #searchInput:focus {
+            border-color: #0f392b;
+        }
+
+        /* ================= POSTS ================= */
+
+        #posts {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .post-card {
+            background: white;
+
+            border: 1px solid #dfe6e1;
+
+            border-radius: 18px;
+
+            padding: 22px;
+
+            box-shadow: 0 4px 15px rgba(15, 57, 43, 0.03);
+
+            transition: 0.2s;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 8px 25px rgba(15, 57, 43, 0.07);
+        }
+
+        .post-author {
+            color: #45645a;
+
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+        .post-card h3 {
+            color: #0f392b;
+
+            font-family: "Playfair Display", serif;
+
+            font-size: 23px;
+
+            margin-bottom: 8px;
+        }
+
+        .post-content {
+            color: #61736c;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            margin-bottom: 18px;
+        }
+
+        /* ================= COMMENTS ================= */
+
+        .comments-section {
+            border-top: 1px solid #edf1ed;
+
+            padding-top: 15px;
+        }
+
+        .comments-section h4 {
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        .comment {
+            background: #f5f8f5;
+
+            border-radius: 10px;
+
+            padding: 10px 12px;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            color: #526a60;
+        }
+
+        .comment-form {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 12px;
+        }
+
+        .comment-form input {
+            flex: 1;
+
+            border: 1px solid #dce5df;
+
+            border-radius: 9px;
+
+            padding: 10px 12px;
+
+            font-family: "DM Sans", sans-serif;
+
+            outline: none;
+        }
+
+        .comment-form button {
+            border: none;
+
+            background: #0f392b;
+
+            color: white;
+
+            border-radius: 9px;
+
+            padding: 10px 15px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+        }
+
+        /* ================= DELETE ================= */
+
+        .delete-button {
+            margin-top: 15px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #a45b5b;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            text-decoration: underline;
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-message {
+            background: white;
+
+            border: 1px solid #dfe6e1;
+
+            border-radius: 16px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            color: #708078;
+        }
+
+        /* ================= CHAT BUTTON ================= */
+
+        .chat-button {
+            position: fixed;
+
+            right: 0;
+            bottom: 25px;
+
+            width: 68px;
+            height: 68px;
+
+            border: none;
+
+            border-radius: 50% 0 0 50%;
+
+            background: #ef4166;
+
+            color: white;
+
+            font-size: 27px;
+
+            cursor: pointer;
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+
+            z-index: 50;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .nav-links {
+                margin-left: 25px;
+                gap: 18px;
+            }
+
+            .nav-links a:nth-child(4) {
+                display: none;
+            }
+
+            .hero {
+                margin: 10px;
+                height: 230px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .forum-header {
+                flex-direction: column;
+                align-items: flex-start;
+
+                gap: 12px;
+            }
+
+            #searchInput {
+                width: 100%;
+            }
+
+            .comment-form {
+                flex-direction: column;
+            }
+
+            .comment-form button {
+                width: 100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Alumni Forge
+    </div>
+
+    <div class="nav-links">
+
+        <a href="#">
+            Home
+        </a>
+
+        <a href="#">
+            Quiz
+        </a>
+
+        <a href="#" class="active">
+            Community
+        </a>
+
+        <a href="#">
+            About
+        </a>
+
+    </div>
+
+    <div class="profile">
+        👤
+    </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-small">
+            COMMUNITY
+        </div>
+
+        <h1>
+            Alumni Forge
+        </h1>
+
+        <p>
+            Learn, ask, and grow together.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <div id="status">
+        Loading...
+    </div>
+
+
+    <!-- ================= CREATE POST ================= -->
+
+    <section class="create-post">
+
+        <div class="create-header">
+
+            <div class="create-icon">
+                💬
+            </div>
+
+            <div>
+
+                <h2>
+                    Start a Discussion
+                </h2>
+
+                <p>
+                    Ask a question, share an idea, or help another learner.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form id="post-form">
+
+            <input
+                id="post-title"
+                type="text"
+                placeholder="What would you like to discuss?"
+                required
+            >
+
+
+            <textarea
+                id="post-content"
+                placeholder="Write your question or discussion..."
+                required
+            ></textarea>
+
+
+            <div class="post-button-area">
+
+                <button type="submit">
+                    Post Discussion
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================= FORUM ================= -->
+
+    <div class="forum-header">
+
+        <h2>
+            Discussions
+        </h2>
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="⌕  Search discussions..."
+        >
+
+    </div>
+
+
+    <!-- Posts are generated by forumTest.js -->
+
+    <div id="posts"></div>
+
+
+</main>
+
+
+<!-- ================= CHAT BUTTON ================= -->
+
+<button
+    class="chat-button"
+    onclick="alert('Community chat will be added separately.')"
+    aria-label="Community chat"
+>
+    💬
+</button>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script
+    type="module"
+    src="/src/forumTest.js"
+></script>
+
+
+<!-- ================= SEARCH ================= -->
+
+<script>
+
+    document
+        .getElementById("searchInput")
+        .addEventListener("input", function () {
+
+            const searchText =
+                this.value.toLowerCase().trim();
+
+            const posts =
+                document.querySelectorAll(".post-card");
+
+
+            posts.forEach(function (post) {
+
+                const text =
+                    post.innerText.toLowerCase();
+
+                post.style.display =
+                    text.includes(searchText)
+                        ? ""
+                        : "none";
+
+            });
+
+        });
+
+</script>
+
+
+</body>
+
 </html>
